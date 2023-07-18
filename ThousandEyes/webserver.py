@@ -14,10 +14,10 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-@app.route('/<hostname>',methods = ['GET', 'POST'])
+# @app.route('/<hostname>',methods = ['GET', 'POST'])
 @app.route('/',methods = ['GET', 'POST'])
-def home(hostname=None):
-    if hostname:
+def home():
+    try:
         agent_Id = get_agentId(host=hostname)
         logging.info(f'Agent id is {agent_Id}')
         response_time_list = get_best_VPN(agent_Id=agent_Id)
@@ -30,14 +30,14 @@ def home(hostname=None):
                 logger.info(f'Best VPN server is {best_VPN}')
 
         if best_VPN == '206945':
-            vpn='https://198.18.4.100'
+            vpn='https://vpn1.demojam.com'
             logger.info(f'Best VPN server address is {vpn}')
             return redirect(vpn, code=302)
         if best_VPN == '207112':
-            vpn='https://198.18.4.200'
+            vpn='https://vpn1.demojam.com'
             logger.info(f'Best VPN server address is {vpn}')
             return redirect(vpn, code=302)
-    else:
+    except:
         return redirect('https://198.18.4.200', code=302)
 if __name__ == '__main__':
     app.run(debug=True, ssl_context=('cert.pem', 'key.pem'))
