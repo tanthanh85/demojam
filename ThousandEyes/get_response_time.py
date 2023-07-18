@@ -1,11 +1,12 @@
 import requests
+from pprint import pprint
 # from get_agentID import *
 
 headers = {
-    'Authorization': 'Basic dGhhbmRvYW5AY2lzY28uY29tOm5lOTVma3dpYXJrMGsweGhjYnFrY21ia25vcmtpeGw2'
+    'Authorization': 'Bearer 1a7b95ff-5aa6-421a-9ec8-d0b7bf63e67a'
 }
 #test ID for ISE
-test_ids = ['190994','190995']
+test_ids = ['206945','207112']
 
 
 base_url = 'https://api.thousandeyes.com/'
@@ -24,3 +25,10 @@ def get_best_VPN(agent_Id=None):
                 # print(f"Average response time from VPN Server " + metric['serverIp'] + f" to agent {agent_Id}" + " is " + str(metric['responseTime']) + " ms")
                 response_time_list[test_id] = metric['responseTime']
     return response_time_list
+
+
+if __name__=='__main__':
+    response_time_list=get_best_VPN(agent_Id='b72a845f-8a86-4e7e-8664-27fbb58c702d')
+
+    print(response_time_list)
+   
