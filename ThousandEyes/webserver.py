@@ -34,7 +34,7 @@ def home():
             logger.info(f'Best VPN server address is {vpn}')
             return redirect(vpn, code=302)
         if best_VPN == '207112':
-            vpn='https://vpn1.demojam.com'
+            vpn='https://vpn2.demojam.com'
             logger.info(f'Best VPN server address is {vpn}')
             return redirect(vpn, code=302)
     except:
