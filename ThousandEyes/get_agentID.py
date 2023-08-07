@@ -28,7 +28,7 @@ def get_agentId(host=None):
 def get_agentId_byIP(IP=None):
     uri = 'v6/endpoint-agents.json'
     response = requests.get(url=base_url+uri,headers=headers)
-    
+    # print(response.text)
     for agent in response.json()['endpointAgents']:
         if agent['networkInterfaceProfiles'][0]['addressProfiles'][0]['ipAddress'] == IP:
             agent_id = agent['agentId']
@@ -49,8 +49,6 @@ if __name__=='__main__':
     agent_id=get_agentId_byIP(IP='198.18.4.10')
 
     pprint(agent_id)
-    # test_id=get_testId()
-    # print(test_id)
 
 
 
