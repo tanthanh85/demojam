@@ -1,4 +1,4 @@
-from flask import Flask,redirect
+from flask import Flask,redirect,request
 from get_response_time import vpn_1, vpn_2, get_best_VPN
 from get_agentID import *
 app = Flask(__name__)
@@ -18,7 +18,7 @@ logger.setLevel(logging.INFO)
 @app.route('/',methods = ['GET', 'POST'])
 def home():
     try:
-        agent_Id = get_agentId(host=hostname)
+        agent_Id = get_agentId_byIP(IP=request.remote_addr)
         logging.info(f'Agent id is {agent_Id}')
         response_time_list = get_best_VPN(agent_Id=agent_Id)
         logger.info(f'response time list is {response_time_list}')  
