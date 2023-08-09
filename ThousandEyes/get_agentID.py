@@ -28,11 +28,18 @@ def get_agentId(host=None):
 def get_agentId_byIP(IP=None):
     uri = 'v6/endpoint-agents.json'
     response = requests.get(url=base_url+uri,headers=headers)
-    # print(response.text)
+    # pprint(response.text,indent=2)
+    with open('agent.json', 'w') as f:
+        f.write(response.text)
     for agent in response.json()['endpointAgents']:
-        if agent['networkInterfaceProfiles'][0]['addressProfiles'][0]['ipAddress'] == IP:
-            agent_id = agent['agentId']
-            break
+        # if agent['networkInterfaceProfiles'][0]['addressProfiles'][0]['ipAddress'] == IP:
+        #     agent_id = agent['agentId']
+        #     break
+        for address in agent['networkInterfaceProfiles']:
+            if address['addressProfiles'][0]['ipAddress'] == IP:
+                agent_id = agent['agentId']
+                break
+
     # with open('agentid.yaml', 'w') as f:
     #     f.write(agent_id)
     return agent_id
